@@ -41,7 +41,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     info.changeLifeBy(-1)
     pause(1000)
 })
-controller.moveSprite(sprites.create(img`
+let mySprite: Sprite = null
+let mySprite2 = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
     . . . f f f 2 2 2 2 f f f . . . 
@@ -58,27 +59,29 @@ controller.moveSprite(sprites.create(img`
     . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
-    `, SpriteKind.Player), 100, 100)
-let mySprite = sprites.create(img`
-    . . . . 2 2 2 2 2 e . . . . . . 
-    . . . 2 2 2 2 d 2 2 e . . . . . 
-    . . e 2 2 2 2 2 2 2 e . . . . . 
-    . . e 2 2 2 2 2 2 2 e . . . . . 
-    . . e 2 2 2 2 2 e f f c c . . . 
-    . . e e 2 2 e f f f f b c . . . 
-    . e e e f e 2 b f f f d c . . . 
-    e e 2 2 d f 2 1 1 1 1 b c . . . 
-    e e 2 2 d f e e c c c . . . . . 
-    b 1 1 d e 2 2 e e c . . . . . . 
-    . f f e 2 2 2 2 e . . . . . . . 
-    . . f f d d 2 2 f f d d . . . . 
-    . . f f d d e e f f d d . . . . 
-    . . . f f f f . . . . . . . . . 
-    . . e e e f f f . . . . . . . . 
-    . . e e e e f f f . . . . . . . 
-    `, SpriteKind.Enemy)
-for (let index = 0; index < 4; index++) {
-    mySprite.setPosition(30, randint(0, 100))
-    mySprite.setVelocity(50, 0)
-}
+    `, SpriteKind.Player)
+controller.moveSprite(mySprite2, 100, 100)
 info.setLife(3)
+mySprite2.setStayInScreen(true)
+game.onUpdateInterval(200, function () {
+    mySprite = sprites.create(img`
+        . . . . 2 2 2 2 2 e . . . . . . 
+        . . . 2 2 2 2 d 2 2 e . . . . . 
+        . . e 2 2 2 2 2 2 2 e . . . . . 
+        . . e 2 2 2 2 2 2 2 e . . . . . 
+        . . e 2 2 2 2 2 e f f c c . . . 
+        . . e e 2 2 e f f f f b c . . . 
+        . e e e f e 2 b f f f d c . . . 
+        e e 2 2 d f 2 1 1 1 1 b c . . . 
+        e e 2 2 d f e e c c c . . . . . 
+        b 1 1 d e 2 2 e e c . . . . . . 
+        . f f e 2 2 2 2 e . . . . . . . 
+        . . f f d d 2 2 f f d d . . . . 
+        . . f f d d e e f f d d . . . . 
+        . . . f f f f . . . . . . . . . 
+        . . e e e f f f . . . . . . . . 
+        . . e e e e f f f . . . . . . . 
+        `, SpriteKind.Enemy)
+    mySprite.setPosition(0, randint(0, 100))
+    mySprite.setVelocity(50, 0)
+})
